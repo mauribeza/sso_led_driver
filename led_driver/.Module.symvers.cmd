@@ -1,0 +1,1 @@
+cmd_/home/manuelaPi/Documents/sso_led_driver/led_driver/Module.symvers :=  sed 's/ko$$/o/'  /home/manuelaPi/Documents/sso_led_driver/led_driver/modules.order | scripts/mod/modpost -m -a    -o /home/manuelaPi/Documents/sso_led_driver/led_driver/Module.symvers -e -i Module.symvers -T - 
