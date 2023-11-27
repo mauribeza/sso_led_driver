@@ -133,7 +133,7 @@ Asegúrate que el módulo haya cargado correctamente usando el comando:
 - Verifica en los logs del kernel por si aprece algún mensaje de error al momento de cargar el módulo con el comando:
 
 ```bash
- lsmod | grep led_driver
+ dmesg
  ```
 
 - Si deseas desmontar el módulo, utiliza el siguiente comando:
