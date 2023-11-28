@@ -1,142 +1,142 @@
-# LED Driver para Raspberry Pi
+# LED Driver for Raspberry Pi
 
-Este es un simple driver en C para controlar LEDs en una Raspberry Pi a través de comandos. Puedes encender o apagar uno o varios LEDs usando los comandos adecuados.
+This is a C driver to control LEDs on a Raspberry Pi via commands. You can turn one or more LEDs on or off using the appropriate commands.
 
-## Requisitos
+## Requirement
 
-- Raspberry Pi con sistema operativo compatible (p. ej., Raspbian).
-- Conexión a internet para descargar las dependencias.
+- Raspberry Pi with compatible operating system (e.g. Raspbian).
+- Internet connection to download dependencies.
 
-## Conexión de LEDs
+## LEDs Connection
 
-### Materiales necesarios:
+### Materials needed:
 
 1. Raspberry Pi.
 2. LEDs.
-3. Resistencias de 330 ohmios.
-4. Cables de conexión.
+3. 330 ohm resistors.
+4. Connection cables.
 
-### Instrucciones de conexión:
+### Connection instructions:
 
 1. **LEDs:**
 
-   - Conecta el polo largo (ánodo) del LED al pin GPIO 21 de la Raspberry Pi.
-   - Conecta el polo corto (cátodo) del LED a través de una resistencia de 330 ohmios al suelo (GND) de la Raspberry Pi.
+   - Connect the long pole (anode) of the LED to GPIO pin 21 of the Raspberry Pi.
+   - Connect the short pole (cathode) of the LED through a 330 ohm resistor to the ground (GND) of the Raspberry Pi.
 
-2. **Resistencias:**
+2. **Resistances:**
 
-   - Conecta una resistencia de 330 ohmios al polo corto (cátodo) de cada LED.
-   - Conecta el otro extremo de la resistencia al suelo (GND) de la Raspberry Pi.
+- Connect a 330 ohm resistor to the short pole (cathode) of each LED.
+- Connect the other end of the ground resistor (GND) of the Raspberry Pi.
 
-3. **Conexión general:**
+3. **General connection:**
 
-   - Asegúrate de que la Raspberry Pi esté apagada antes de realizar las conexiones.
-   - Conecta los cables cuidadosamente para evitar cortocircuitos.
-   - Enciende la Raspberry Pi después de realizar todas las conexiones.
+- Make sure the Raspberry Pi is turned off before making connections.
+- Connect the cables carefully to avoid short circuits.
+- Turn on the Raspberry Pi after making all connections.
 
-### Esquema de conexión:
+### Connection diagram:
 
-![Representación grafíca de la conexión de los Leds en la Raspberry Pi 4](https://github.com/mauribeza/sso_led_driver/blob/main/Screenshot%202023-11-27%20at%202.06.08%20PM.png)
+![Graphic representation of the connection of the LEDs on the Raspberry Pi 4](https://github.com/mauribeza/sso_led_driver/blob/main/Screenshot%202023-11-27%20at%202.06.08%20PM.png)
 
-## Instalación
+## Installing
 
-### Opción 1: Usar el archivo .ko proporcionado
+### Option 1: Use the provided .ko file
 
-1. Clona este repositorio en tu Raspberry Pi:
+1. Clone this repository to your Raspberry Pi:
 
     ```bash
     git clone https://github.com/mauribeza/sso_led_driver.git
     ```
 
-2. Navega al directorio del driver:
+2. Navigate to the driver directory:
 
     ```bash
     cd sso_led_driver/led_driver
     ```
 
-3. **Carga el módulo:**
+3. **Load the module:**
 
-    Utiliza el siguiente comando para cargar el módulo:
+   Use the following command to load the module:
 
     ```bash
     sudo insmod led_driver.ko
     ```
 
-### Opción 2: Compilar y cargar el módulo
+### Option 2: Compile and load the module
 
-1. Clona este repositorio en tu Raspberry Pi:
+1. Clone this repository to your Raspberry Pi:
 
     ```bash
     git clone https://github.com/mauribeza/sso_led_driver.git
     ```
 
-2. Navega al directorio del driver:
+2. Navigate to the driver directory:
 
     ```bash
     cd sso_led_driver/led_driver
     ```
 
-3. Compila el código fuente:
+3. Compile the source code:
 
     ```bash
     make
     ```
 
-4. **Carga el módulo:**
+4. **Load the module:**
 
-    Utiliza el siguiente comando para cargar el módulo:
+    Use the following command to load the module:
 
     ```bash
     sudo insmod led_driver.ko
     ```
 
-## Uso
+## Use
 
-Antes de ejecutar los comandos para controlar los LEDs, asegúrate de tener los permisos adecuados. Puedes hacerlo ejecutando el siguiente comando para cambiar al usuario superusuario:
+Before running the commands to control the LEDs, make sure you have the appropriate permissions. You can do this by running the following command to change the user to superuser:
 
 ```bash
 sudo su
 ```
 
-Luego podrás utilizar los siguientes comandos para controlar los LEDs:
+Then you can use the following commands to control the LEDs:
 
-- Encender LED:
+- Turn on LED:
   
 ```bash
 echo 1 > /dev/etx_device
 ```
 
-- Apagar LED:
+- Turn off LED:
   
 ```bash
 echo 0 > /dev/etx_device 
 ```
 
-## Notas adicionales:
+## Additional notes:
 
-- Ajusta la resistencia de 330 ohmios según las especificaciones de tu LED y la alimentación de la Raspberry Pi para garantizar un funcionamiento seguro.
+- Adjust the 330 ohm resistor according to the specifications of your LED and the power of the Raspberry Pi to ensure safe operation.
 
-- Asegúrate de que el pin GPIO 21 no esté configurado para funciones especiales antes de ejecutar el driver.
+- Make sure GPIO pin 21 is not configured for special functions before running the driver.
 
-- Una vez cargado el módulo usando el comando:
+- Once the module is loaded using the command:
   
  ```bash
  sudo insmod led_driver.ko
  ```
 
-Asegúrate que el módulo haya cargado correctamente usando el comando:
+Make sure the module has loaded correctly using the command:
 
  ```bash
  lsmod | grep led_driver
  ```
 
-- Verifica en los logs del kernel por si aprece algún mensaje de error al momento de cargar el módulo con el comando:
+- Check the kernel logs for any error messages when loading the module with the command:
 
 ```bash
  dmesg
  ```
 
-- Si deseas desmontar el módulo, utiliza el siguiente comando:
+- If you want to unmount the module, use the following command:
 
 ```bash
  sudo rmmod led_driver
